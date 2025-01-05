@@ -1,5 +1,6 @@
 let firstCard = 10;
 let secondCard = 4;
+let cards = [firstCard, secondCard];
 let sum = firstCard + secondCard;
 let hasBlackJack = false;
 let isAlive = true;
@@ -7,7 +8,7 @@ let message = "";
 
 
 
-function startGame() {
+function renderGame() {
 
     let messageEl = document.querySelector("#message-el");
     console.log(messageEl);
@@ -30,56 +31,33 @@ function startGame() {
 
     messageEl.textContent = message;
     sumEl.textContent = "Sum: " + sum;
-    cardsEl.textContent = "Cards: " + firstCard + ", " + secondCard;
+    cardsEl.textContent = "Cards: " + cards[0] + ", " + cards[1];
+
+}
+
+function startGame() {  
+    renderGame();
+}
+
+function newCard() {
+
+    console.log("Drawing a new card from the deck!");
+    let newCard = 7;
+    sum += newCard;
+    cards.push(newCard);
+    console.log(cards);
+    renderGame();
 }
 
 
+//----------------- For loop -----------------
+for (let i = 0; i <=cards.length; i++){
+    console.log(cards[i]);
+}
 
+let sentence = ["Hello", "my", "name", "is", "Per"] 
+let greetingEl = document.getElementById("greeting-el");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// if (sum < 21) {
-//     console.log("Do you want to draw a new card? 🙂");
-// } else if (sum === 21) {
-//     console.log("Wohoo! You've got Blackjack! 🥳");
-// } else {
-//     console.log("You're out of the game! 😭");
-// }
-
-// let age = 22;
-
-// if (age < 21) {
-//     console.log("You can not enter the club.");
-// } else {
-//     console.log("Welcome to the club!");
-// }
-
-// let age = 100;
-
-// if (age < 100) {
-//     console.log("Not elegible");
-// } else if (age === 100) {
-//     console.log("Here is your birthday card from the King!");
-// } else {
-//     console.log("Not elegible, you have already gotten one");
-// }
+for (let i = 0; i < sentence.length; i++) {
+    greetingEl.textContent += sentence[i] + " ";
+}
