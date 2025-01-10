@@ -1,12 +1,26 @@
-let firstCard = 10;
-let secondCard = 4;
-let cards = [firstCard, secondCard];
-let sum = firstCard + secondCard;
+
+let cards = [];
+let sum = 0;
 let hasBlackJack = false;
-let isAlive = true;
+let isAlive = false;
 let message = "";
+let player = {
+    name: "Per",
+    chips: 145
+}
 
+function getRandomCard() {
 
+    let randomNumber = Math.floor(Math.random() * 13) + 1;
+    if (randomNumber > 10) {
+        return 10;
+    } else if (randomNumber === 1) {
+        return 11;
+    } else {
+        return randomNumber;
+    }
+}
+console.log(getRandomCard());
 
 function renderGame() {
 
@@ -18,7 +32,18 @@ function renderGame() {
 
     let cardsEl = document.querySelector("#cards-el");
     console.log(cardsEl);
+
+    let playerEl = document.querySelector("#player-el");
+    console.log(playerEl);
+
+    cardsEl.textContent = "Cards: ";
     
+    for (let i = 0; i < cards.length; i++) {
+        cardsEl.textContent += cards[i] + ",";
+    }
+
+    sumEl.textContent = "Sum: " + sum;
+
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
     } else if (sum === 21) {
@@ -30,34 +55,25 @@ function renderGame() {
     }
 
     messageEl.textContent = message;
-    sumEl.textContent = "Sum: " + sum;
-    cardsEl.textContent = "Cards: " + cards[0] + ", " + cards[1];
-
+    playerEl.textContent = player.name + ": $" + player.chips;
 }
 
 function startGame() {  
+    isAlive = true;
+    let firstCard = getRandomCard();
+    let secondCard = getRandomCard();
+    cards = [firstCard, secondCard];
+    sum = firstCard + secondCard;
     renderGame();
 }
 
 function newCard() {
-
-    console.log("Drawing a new card from the deck!");
-    let newCard = 7;
-    sum += newCard;
-    cards.push(newCard);
-    console.log(cards);
-    renderGame();
+    if (isAlive === true && hasBlackJack === false) {
+        let newCard = getRandomCard();
+        sum += newCard;
+        cards.push(newCard);
+        renderGame();
+    }
 }
 
 
-//----------------- For loop -----------------
-for (let i = 0; i <=cards.length; i++){
-    console.log(cards[i]);
-}
-
-let sentence = ["Hello", "my", "name", "is", "Per"] 
-let greetingEl = document.getElementById("greeting-el");
-
-for (let i = 0; i < sentence.length; i++) {
-    greetingEl.textContent += sentence[i] + " ";
-}
